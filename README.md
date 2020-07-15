@@ -1,6 +1,19 @@
 # cron-expressions
 Cron expression parser and tooling for typescript and deno
 
+## Example
+
+```typescript
+import {CronExpression} from 'https://raw.githubusercontent.com/rkrx/cron-expressions/master/mod.ts';
+
+// Next monday
+console.log(new CronExpression('0 0 * * 0').getNextDate());
+
+// Next monday relative to a given offset date
+const now = new Date(Date.parse('01 Jan 2020 00:00:00 GMT'));
+console.log(new CronExpression('0 0 * * 0').getNextDate(now));
+```
+
 ## Features
 
 * Basic cron expressions
