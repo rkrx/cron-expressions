@@ -40,7 +40,7 @@ export class CronExpression {
             min: CronExpression.parseValueList(parts[0], 0, 59),
             hour: CronExpression.parseValueList(parts[1], 0, 23),
             dom: (year, month) => CronExpression.parseValueList(parts[2], 1, CronExpression.getDaysInMonth(new Date(year, month))),
-            month: CronExpression.parseValueList(parts[3], 0, 11).map((r: Range) => ({start: r.start - 1, end: r.end - 1})),
+            month: CronExpression.parseValueList(parts[3], 1, 12).map((r: Range) => ({start: r.start - 1, end: r.end - 1})),
             dow: daysOfWeek
         };
     }
@@ -180,7 +180,7 @@ export class CronExpression {
         if(steps) {
             const step = toInt(steps[1]);
             const result = [];
-            for(let i = 0; i < max; i += step) {
+            for(let i = min; i < max; i += step) {
                 result.push({start: mod(i), end: mod(i)});
             }
             return result;
