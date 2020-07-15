@@ -10,7 +10,12 @@ Cron expression parser and tooling for typescript and deno
   * [x] `/` step values (e.g. `*/5`)
   * [x] Any combination of these (e.g. `5-10,20-25,*/15`)
 * Non-standard
-  * [x] Constants (`@yearly`, `@annually`, `@monthly`, `@weekly`, `@daily`, `@hourly`, `@reboot`)
+  * [x] Constants
+    * [x] `@yearly`, `@annually` = `0 0 1 1 *`
+    * [x] `@monthly` = `0 0 1 * *`
+    * [x] `@weekly` = `0 0 * * 0`
+    * [x] `@daily` = `0 0 * * *`
+    * [x] `@hourly` = `0 * * * *`
   * [ ] Named week days (`MON` - `SUN`)
   * [ ] Increments of ranges (`2-59/3`)
   * [ ] `W` to find the nearest weekday for a given day of the month

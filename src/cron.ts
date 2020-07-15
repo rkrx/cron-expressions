@@ -145,7 +145,6 @@ export class CronExpression {
         switch(expression) {
             case '@annually':
             case '@yearly': return '0 0 1 1 *';
-            case '@annually': return '0 0 1 1 *';
             case '@monthly': return '0 0 1 * *';
             case '@weekly': return '0 0 * * 0';
             case '@daily': return '0 0 * * *';
