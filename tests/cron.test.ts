@@ -1,6 +1,7 @@
 import {assertEquals} from "https://deno.land/std/testing/asserts.ts";
 import {format} from "https://deno.land/x/date_fns/index.js";
 import {CronExpression} from "../src/cron.ts";
+import {getNumberForNamedWeekDay, replaceWeekDayNamesWithNumbers} from "../src/named-weekdays.ts";
 
 const t = (expression: string, offsetDate: string, expectedResult: string) => {
     return () => {
@@ -42,6 +43,17 @@ Deno.test('next month, where month has to be */5', t('0 0 1 */5 *', '2000-02-01 
 Deno.test('find any day from sunday till thursday, where it\'s january, 1st; it\'s 0:00h; starting at 2020-01-10', t('0 0 1 1 */5', '2020-01-10 23:59:00', '2021-01-01 00:00:00'));
 Deno.test('find the next sunday where month is january', t('* * * 1 0', '2020-02-01 23:59:59', '2021-01-03 00:00:00'));
 Deno.test('find the next sunday where it\'s january, 1st; it\'s 0:00h; starting at 2020-01-10', t('0 0 1 1 0', '2020-01-10 23:59:00', '2023-01-01 00:00:00'));
+//endregion
+
+//region Named week days 
+Deno.test('MON equals 1', () => assertEquals(getNumberForNamedWeekDay('MON'), 1));
+Deno.test('TUE equals 2', () => assertEquals(getNumberForNamedWeekDay('TUE'), 2));
+Deno.test('WED equals 3', () => assertEquals(getNumberForNamedWeekDay('WED'), 3));
+Deno.test('THU equals 4', () => assertEquals(getNumberForNamedWeekDay('THU'), 4));
+Deno.test('FRI equals 5', () => assertEquals(getNumberForNamedWeekDay('FRI'), 5));
+Deno.test('SAT equals 6', () => assertEquals(getNumberForNamedWeekDay('SAT'), 6));
+Deno.test('SUN equals 0', () => assertEquals(getNumberForNamedWeekDay('SUN'), 0));
+Deno.test('SUN-WED means 0-3', () => assertEquals(replaceWeekDayNamesWithNumbers('SUN-WED'), '0-3'));
 //endregion
 
 function parse(date: string): Date {

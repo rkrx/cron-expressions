@@ -26,6 +26,7 @@ export class CronExpression {
         expression = CronExpression.convert(expression);
         const parts = expression.split(/\s+/);
         parts.push('*', '*', '*', '*', '*');
+        //const numericDow = CronExpression.convertWeekDayNames(parts[4]);
         const dow = CronExpression.parseValueList(parts[4], 0, 6);
         const daysOfWeek = [];
         for(let d = 0; d < 7; d++) {
