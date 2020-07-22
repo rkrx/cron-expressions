@@ -54,6 +54,14 @@ Deno.test('FRI equals 5', () => assertEquals(getNumberForNamedWeekDay('FRI'), 5)
 Deno.test('SAT equals 6', () => assertEquals(getNumberForNamedWeekDay('SAT'), 6));
 Deno.test('SUN equals 0', () => assertEquals(getNumberForNamedWeekDay('SUN'), 0));
 Deno.test('SUN-WED means 0-3', () => assertEquals(replaceWeekDayNamesWithNumbers('SUN-WED'), '0-3'));
+Deno.test('find the next sunday where it\'s january, 1st; it\'s 0:00h; starting at 2020-01-10 using a named weekday', t('0 0 1 1 SUN', '2020-01-10 23:59:00', '2023-01-01 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to FRI; starting at 2020-01-10 using named weekdays', t('0 0 * * TUE-FRI', '2020-01-10 00:00:00', '2020-01-14 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to FRI; starting at 2020-01-14 using named weekdays', t('0 0 * * TUE-FRI', '2020-01-14 00:00:00', '2020-01-15 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to FRI; starting at 2020-01-15 using named weekdays', t('0 0 * * TUE-FRI', '2020-01-15 00:00:00', '2020-01-16 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to FRI; starting at 2020-01-16 using named weekdays', t('0 0 * * TUE-FRI', '2020-01-16 00:00:00', '2020-01-17 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to FRI; starting at 2020-01-17 using named weekdays', t('0 0 * * TUE-FRI', '2020-01-17 00:00:00', '2020-01-21 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to WED and 4-5; starting at 2020-01-10 using named weekdays', t('0 0 * * TUE-WED,4-5', '2020-01-10 00:00:00', '2020-01-14 00:00:00'));
+Deno.test('find the next day, that is some day between TUE to WED and 4-5; starting at 2020-01-17 using named weekdays', t('0 0 * * TUE-WED,4-5', '2020-01-17 00:00:00', '2020-01-21 00:00:00'));
 //endregion
 
 function parse(date: string): Date {
