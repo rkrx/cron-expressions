@@ -1,5 +1,5 @@
 export function replaceWeekDayNamesWithNumbers(input: string): string {
-    return input.replaceAll(/\b([a-zA-Z]+)\b/g, (match) => `${getNumberForNamedWeekDay(match)}`);
+    return input.replaceAll(/\b([a-zA-Z]{3})\b/g, (match) => `${getNumberForNamedWeekDay(match)}`);
 }
 
 export function getNumberForNamedWeekDay(name: string): number {

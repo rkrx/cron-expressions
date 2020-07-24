@@ -1,6 +1,6 @@
 import {assertEquals} from "https://deno.land/std/testing/asserts.ts";
 import {format} from "https://deno.land/x/date_fns/index.js";
-import {CronExpression} from "../src/cron.ts";
+import {cron} from "../src/cron.ts";
 import {getNumberForNamedWeekDay, replaceWeekDayNamesWithNumbers} from "../src/named-weekdays.ts";
 import {parseValueList} from "../src/tools.ts";
 
@@ -65,9 +65,13 @@ Deno.test('find the next day, that is some day between TUE to WED and 4-5; start
 Deno.test('find the next day, that is some day between TUE to WED and 4-5; starting at 2020-01-17 using named weekdays', macro('0 0 * * TUE-WED,4-5', '2020-01-17 00:00:00', '2020-01-21 00:00:00'));
 //endregion
 
+//region L for _weekdays_
+Deno.test('W means 1-5', () => assertEquals(replaceWeekDayNamesWithNumbers('L'), '1-5'));
+//endregion
+
 function macro(expression: string, offsetDate: string, expectedResult: string) {
     return () => {
-        const nextDate = new CronExpression(expression).getNextDate(parse(offsetDate), 1);
+        const nextDate = cron(expression).getNextDate(parse(offsetDate), 1);
         assertEquals(format(nextDate, 'yyyy-MM-dd HH:mm:ss', undefined), expectedResult);
     };
 }

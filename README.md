@@ -7,14 +7,14 @@ Cron expression parser and tooling for typescript and deno
 ## Example
 
 ```typescript
-import {CronExpression} from 'https://raw.githubusercontent.com/rkrx/cron-expressions/master/mod.ts';
+import {cron} from 'https://raw.githubusercontent.com/rkrx/cron-expressions/master/mod.ts';
 
 // Next monday
-console.log(new CronExpression('0 0 * * 0').getNextDate());
+console.log(cron('0 0 * * 0').getNextDate()); // Next `Date`
 
 // Next monday relative to a given offset date
 const now = new Date(Date.parse('01 Jan 2020 00:00:00 GMT'));
-console.log(new CronExpression('0 0 * * 0').getNextDate(now));
+console.log(cron('0 0 * * 0').getNextDate(now)); // 2020-01-04T23:00:00.000Z
 ```
 
 ## Features
@@ -35,8 +35,6 @@ console.log(new CronExpression('0 0 * * 0').getNextDate(now));
   * [x] Named week days (`MON` - `SUN`)
   * [x] Handle number overflow (`55-5`) which translates to `0-5, 55-59` when used for minutes
   * [ ] Increments of ranges (`2-59/3`)
-  * [ ] `W` to find the nearest weekday for a given day of the month
-  * [ ] `L` to find the last given weekday of a month
   * [ ] Hash (`#`) to find the nth weekday of a given month
 
 ## Side notes
