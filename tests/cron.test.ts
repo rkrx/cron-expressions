@@ -65,7 +65,7 @@ Deno.test('find the next day, that is some day between TUE to WED and 4-5; start
 Deno.test('find the next day, that is some day between TUE to WED and 4-5; starting at 2020-01-17 using named weekdays', macro('0 0 * * TUE-WED,4-5', '2020-01-17 00:00:00', '2020-01-21 00:00:00'));
 //endregion
 
-function macro(expression: string, offsetDate: string, expectedResult: string) => {
+function macro(expression: string, offsetDate: string, expectedResult: string) {
     return () => {
         const nextDate = new CronExpression(expression).getNextDate(parse(offsetDate), 1);
         assertEquals(format(nextDate, 'yyyy-MM-dd HH:mm:ss', undefined), expectedResult);
